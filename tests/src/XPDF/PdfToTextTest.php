@@ -138,8 +138,8 @@ It tells about elephant\'s noze !
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToText::load());
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToText::load(new \Monolog\Logger('xpdf')));
+        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToText::load());
+        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToText::load(new \Monolog\Logger('xpdf')));
     }
 
     /**
@@ -149,7 +149,7 @@ It tells about elephant\'s noze !
      */
     public function testGetBinaryName()
     {
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToTexttester::load());
+        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToTexttester::load());
     }
 }
 
