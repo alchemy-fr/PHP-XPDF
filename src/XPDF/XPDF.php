@@ -147,7 +147,7 @@ class XPDF
 
         try {
             $process->run();
-        } catch (Exception\Exception $e) {
+        } catch (\Symfony\Component\Process\Exception\RuntimeException $e) {
 
         }
 
