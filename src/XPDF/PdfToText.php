@@ -17,9 +17,9 @@ use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
 /**
- * The XPDF object.
+ * The PdfToText object.
  */
-class XPDF
+class PdfToText
 {
     protected $binary;
     protected $logger;
@@ -57,7 +57,7 @@ class XPDF
      * Opens a PDF file to extract the text
      *
      * @param   string      $pathfile The path to the PDF file to extract
-     * @return  \XPDF\XPDF
+     * @return  \XPDF\PdfToText
      *
      * @throws  Exception\InvalidFileArgumentException
      */
@@ -75,7 +75,7 @@ class XPDF
     /**
      * Close the current open file
      *
-     * @return \XPDF\XPDF
+     * @return \XPDF\PdfToText
      */
     public function close()
     {
@@ -89,7 +89,7 @@ class XPDF
      * will fail.
      *
      * @param   string      $charset The charset
-     * @return  \XPDF\XPDF
+     * @return  \XPDF\PdfToText
      */
     public function setOuputEncoding($charset)
     {
@@ -175,7 +175,7 @@ class XPDF
      * Look for pdftotext binary and return a new XPDF object
      *
      * @param   \Monolog\Logger $logger The logger
-     * @return  \XPDF\XPDF
+     * @return  \XPDF\PdfToText
      *
      * @throws Exception\BinaryNotFoundException
      */

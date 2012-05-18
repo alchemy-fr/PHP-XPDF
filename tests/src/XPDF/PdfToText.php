@@ -2,31 +2,31 @@
 
 namespace XPDF;
 
-class XPDFTest extends \PHPUnit_Framework_TestCase
+class PdfToTextTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var XPDF
+     * @var PdfToText
      */
     protected $object;
 
     /**
-     * @covers XPDF\XPDF::__construct
+     * @covers XPDF\PdfToText::__construct
      */
     protected function setUp()
     {
-        $this->object = new XPDF('pdftotext');
+        $this->object = new PdfToText('pdftotext');
     }
 
     /**
-     * @covers XPDF\XPDF::__construct
+     * @covers XPDF\PdfToText::__construct
      */
     public function testConstruct()
     {
-        new XPDF('pdftotext', new \Monolog\Logger('xpdf'));
+        new PdfToText('pdftotext', new \Monolog\Logger('xpdf'));
     }
 
     /**
-     * @covers XPDF\XPDF::__destruct
+     * @covers XPDF\PdfToText::__destruct
      */
     protected function tearDown()
     {
@@ -34,7 +34,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::open
+     * @covers XPDF\PdfToText::open
      */
     public function testOpen()
     {
@@ -42,7 +42,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::open
+     * @covers XPDF\PdfToText::open
      * @expectedException XPDF\Exception\InvalidFileArgumentException
      */
     public function testOpenWrongFile()
@@ -51,7 +51,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::close
+     * @covers XPDF\PdfToText::close
      */
     public function testCloseNoFile()
     {
@@ -59,7 +59,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::close
+     * @covers XPDF\PdfToText::close
      */
     public function testCloseFile()
     {
@@ -68,7 +68,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::close
+     * @covers XPDF\PdfToText::close
      * @expectedException \XPDF\Exception\LogicException
      */
     public function testProcessClose()
@@ -79,7 +79,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::close
+     * @covers XPDF\PdfToText::close
      * @expectedException \XPDF\Exception\LogicException
      */
     public function testProcessNotOpen()
@@ -88,8 +88,8 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::setOuputEncoding
-     * @covers XPDF\XPDF::getOuputEncoding
+     * @covers XPDF\PdfToText::setOuputEncoding
+     * @covers XPDF\PdfToText::getOuputEncoding
      */
     public function testSetOuputEncoding()
     {
@@ -99,7 +99,7 @@ class XPDFTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XPDF\XPDF::getText
+     * @covers XPDF\PdfToText::getText
      */
     public function testGetText()
     {
@@ -113,7 +113,7 @@ It tells about elephant\'s noze !
     }
 
     /**
-     * @covers XPDF\XPDF::getText
+     * @covers XPDF\PdfToText::getText
      * @expectedException XPDF\Exception\RuntimeException
      */
     public function testGetTextFail()
@@ -124,7 +124,7 @@ It tells about elephant\'s noze !
     }
 
     /**
-     * @covers XPDF\XPDF::getText
+     * @covers XPDF\PdfToText::getText
      * @expectedException XPDF\Exception\LogicException
      */
     public function testGetTextNoFile()
@@ -133,27 +133,27 @@ It tells about elephant\'s noze !
     }
 
     /**
-     * @covers XPDF\XPDF::load
-     * @covers XPDF\XPDF::getBinaryName
+     * @covers XPDF\PdfToText::load
+     * @covers XPDF\PdfToText::getBinaryName
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\XPDF::load());
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\XPDF::load(new \Monolog\Logger('xpdf')));
+        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToText::load());
+        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToText::load(new \Monolog\Logger('xpdf')));
     }
 
     /**
-     * @covers XPDF\XPDF::load
-     * @covers XPDF\XPDF::getBinaryName
+     * @covers XPDF\PdfToText::load
+     * @covers XPDF\PdfToText::getBinaryName
      * @expectedException XPDF\Exception\BinaryNotFoundException
      */
     public function testGetBinaryName()
     {
-        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\XPDFtester::load());
+        $this->assertInstanceOf('\\XPDF\\XPDF', \XPDF\PdfToTexttester::load());
     }
 }
 
-class XPDFtester extends XPDF
+class PdfToTexttester extends PdfToText
 {
 
     protected static function getBinaryName()
