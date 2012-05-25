@@ -61,14 +61,18 @@ Basic Usage
     <?php
     use Monolog\Logger;
     use Monolog\Handler\NullHandler;
+    use XPDF\PdfToText;
 
     // Create a logger
-    $logger = new Logger('PHPUnit');
+    $logger = new Logger('MyLogger');
     $logger->pushHandler(new NullHandler());
 
     // You have to pass a Monolog logger
     // This logger provides some usefull infos about what's happening
     $pdfToText = PdfToText::load($logger);
+
+    // open PDF
+    $pdfToText->open('PDF-book.pdf');
 
     // PDF text is now in the $text variable
     $text = $pdfToText->getText());
@@ -117,7 +121,7 @@ You can restrict the text extraction on page range. For example to extract pages
 Handling Exceptions
 -------------------
 
-Pdf2Text throws 4 different types of exception :
+XPDF throws 4 different types of exception :
 
 - ``\XPDF\Exception\BinaryNotFoundException`` is thrown when no acceptable
   pdf2text binary is found.
@@ -171,7 +175,7 @@ About
 -----
 
 PHP-XPDF has been written by Romain Neutron @ `Alchemy <http://alchemy.fr/>`_
-for `Phraseanet <https://github.com/alchemy-fr/Phraseanet>`, our DAM software.
+for `Phraseanet <https://github.com/alchemy-fr/Phraseanet>`_, our DAM software.
 Try it, it's awesome !
 
 License
