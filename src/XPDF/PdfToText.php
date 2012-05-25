@@ -12,7 +12,6 @@
 namespace XPDF;
 
 use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -51,10 +50,10 @@ class PdfToText
     /**
      * Opens a PDF file to extract the text
      *
-     * @param   string      $pathfile The path to the PDF file to extract
-     * @return  \XPDF\PdfToText
+     * @param  string          $pathfile The path to the PDF file to extract
+     * @return \XPDF\PdfToText
      *
-     * @throws  Exception\InvalidFileArgumentException
+     * @throws Exception\InvalidFileArgumentException
      */
     public function open($pathfile)
     {
@@ -87,8 +86,8 @@ class PdfToText
      * Set the output encoding. If the charset is invalid, the getText method
      * will fail.
      *
-     * @param   string      $charset The charset
-     * @return  \XPDF\PdfToText
+     * @param  string          $charset The charset
+     * @return \XPDF\PdfToText
      */
     public function setOuputEncoding($charset)
     {
@@ -111,12 +110,12 @@ class PdfToText
      * Extract the text of the current open PDF file, if not page start/end
      * provided, etxract all pages
      *
-     * @param   int     $page_start     The starting page number (first is 1)
-     * @param   int     $page_end       The ending page number
-     * @return  string                  The extracted text
+     * @param  int    $page_start The starting page number (first is 1)
+     * @param  int    $page_end   The ending page number
+     * @return string The extracted text
      *
-     * @throws  Exception\LogicException
-     * @throws  Exception\RuntimeException
+     * @throws Exception\LogicException
+     * @throws Exception\RuntimeException
      */
     public function getText($page_start = null, $page_end = null)
     {
@@ -176,8 +175,8 @@ class PdfToText
     /**
      * Look for pdftotext binary and return a new XPDF object
      *
-     * @param   \Monolog\Logger $logger The logger
-     * @return  \XPDF\PdfToText
+     * @param  \Monolog\Logger $logger The logger
+     * @return \XPDF\PdfToText
      *
      * @throws Exception\BinaryNotFoundException
      */
