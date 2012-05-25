@@ -14,7 +14,10 @@ class PdfToTextTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new PdfToText('pdftotext');
+        $this->logger = new \Monolog\Logger('PHPUnit');
+        $this->logger->pushHandler(new \Monolog\Handler\NullHandler());
+
+        $this->object = new PdfToText('pdftotext', $this->logger);
     }
 
     /**
@@ -22,7 +25,7 @@ class PdfToTextTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        new PdfToText('pdftotext', new \Monolog\Logger('xpdf'));
+        new PdfToText('pdftotext', $this->logger);
     }
 
     /**
@@ -138,8 +141,7 @@ It tells about elephant\'s noze !
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToText::load());
-        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToText::load(new \Monolog\Logger('xpdf')));
+        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToText::load($this->logger));
     }
 
     /**
@@ -149,7 +151,7 @@ It tells about elephant\'s noze !
      */
     public function testGetBinaryName()
     {
-        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToTexttester::load());
+        $this->assertInstanceOf('\\XPDF\\PdfToText', \XPDF\PdfToTexttester::load($this->logger));
     }
 }
 

@@ -32,15 +32,9 @@ class PdfToText
      * @param string $binary The path to the `pdftotext` binary
      * @param Logger $logger The logger
      */
-    public function __construct($binary, Logger $logger = null)
+    public function __construct($binary, Logger $logger)
     {
         $this->binary = $binary;
-
-        if ( ! $logger) {
-            $logger = new Logger('xpdf');
-            $logger->pushHandler(new NullHandler());
-        }
-
         $this->logger = $logger;
     }
 
@@ -50,6 +44,7 @@ class PdfToText
     public function __destruct()
     {
         $this->close();
+        $this->logger->addDebug('Destructing PdfToText');
         $this->binary = $this->logger = null;
     }
 
@@ -63,7 +58,10 @@ class PdfToText
      */
     public function open($pathfile)
     {
+        $this->logger->addInfo(sprintf('PdfToText opens %s', $pathfile));
+
         if ( ! file_exists($pathfile)) {
+            $this->logger->addError(sprintf('PdfToText file %s does not exists', $pathfile));
             throw new Exception\InvalidFileArgumentException(sprintf('%s is not a valid file', $pathfile));
         }
 
@@ -79,6 +77,7 @@ class PdfToText
      */
     public function close()
     {
+        $this->logger->addInfo(sprintf('PdfToText closes %s', $this->pathfile));
         $this->pathfile = null;
 
         return $this;
@@ -122,6 +121,7 @@ class PdfToText
     public function getText($page_start = null, $page_end = null)
     {
         if ( ! $this->pathfile) {
+            $this->logger->addDebug('PdfToText no file open, unable to extract text');
             throw new Exception\LogicException('You must open a file to get some text');
         }
 
@@ -140,7 +140,7 @@ class PdfToText
             . ' ' . escapeshellarg($this->pathfile)
             . ' ' . escapeshellarg($tmpFile);
 
-        $this->logger->addInfo(sprintf('Processing %s', $cmd));
+        $this->logger->addInfo(sprintf('PdfToText executing %s', $cmd));
 
         $process = new Process($cmd);
         $success = false;
@@ -156,6 +156,7 @@ class PdfToText
         if ($process->isSuccessful()) {
             $success = true;
             $ret = file_get_contents($tmpFile);
+            $this->logger->addDebug(sprintf('PdfToText command success, result is %d long', strlen($ret)));
         } else {
             $this->logger->addError(sprintf('Process failed : %s', $process->getErrorOutput()));
         }
@@ -165,6 +166,7 @@ class PdfToText
         }
 
         if ( ! $success) {
+            $this->logger->addDebug(sprintf('PdfToText command failed', $cmd));
             throw new Exception\RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
         }
 
@@ -179,13 +181,17 @@ class PdfToText
      *
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(\Monolog\Logger $logger = null)
+    public static function load(\Monolog\Logger $logger)
     {
         $finder = new ExecutableFinder();
 
         if (null !== $binary = $finder->find(static::getBinaryName())) {
+            $logger->addInfo(sprintf('PdfToText loading with binary %s', $binary));
+
             return new static($binary, $logger);
         }
+
+        $logger->addInfo('PdfToText not found');
 
         throw new Exception\BinaryNotFoundException('Binary not found');
     }
