@@ -1,0 +1,19 @@
+body, html {
+    background-color:#FFFFFF;
+}
+
+.hero-unit {
+    background-color: transparent;
+}
+
+tt.literal{
+    font-weight:bold;
+}
+
+h2{
+ margin: 15px 0 5px;
+}
+
+h3{
+ margin: 15px 0 10px;
+}
