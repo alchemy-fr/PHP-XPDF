@@ -17,6 +17,8 @@ use Symfony\Component\Process\Process;
 
 /**
  * The PdfToText object.
+ *
+ * @author Romain Neutron <imprec@gmail.com>
  */
 class PdfToText
 {
