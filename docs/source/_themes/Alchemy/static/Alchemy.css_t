@@ -6,6 +6,9 @@ body, html {
     background-color: transparent;
 }
 
+tt.literal{
+    font-weight:bold;
+}
 
 a.headerlink {
     display:none;
