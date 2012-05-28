@@ -2,9 +2,6 @@
 # project name
 project = u'PHP XPDF'
 
-#github repository URL
-github_repo = 'https://github.com/alchemy-fr/PHP-XPDF'
-
 # Tex info conf
 texinfo_documents = [
   ('index', 'PHPXPDF', u'PHP XPDF Documentation',
