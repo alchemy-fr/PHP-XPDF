@@ -75,7 +75,7 @@ Basic Usage
     $pdfToText->open('PDF-book.pdf');
 
     // PDF text is now in the $text variable
-    $text = $pdfToText->getText());
+    $text = $pdfToText->getText();
     $pdfToText->close();
 
 Using Custom Binary
