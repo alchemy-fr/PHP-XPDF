@@ -1,5 +1,6 @@
 import sys, os
 import os.path
+import shutil
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -228,6 +229,8 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+shutil.copytree('../API', '../build/html/API')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
