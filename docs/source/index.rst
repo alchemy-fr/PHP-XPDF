@@ -4,22 +4,23 @@ PHP XPDF documentation
 Introduction
 ------------
 
-PHP-XPDF is an object oriented library to manipulate `XPDF <http://www.foolabs.com/xpdf/>`_,
-an open source project self-describing as "a viewer for Portable Document Format
-files. The Xpdf project also includes a PDF text extractor, PDF-to-PostScript
-converter, and various other utilities."
+PHP-XPDF is an object oriented library to handle 
+`XPDF <http://www.foolabs.com/xpdf/>`_, an open source project self-described 
+as "a viewer for Portable Document Format files. The Xpdf project also includes 
+a PDF text extractor, PDF-to-PostScript converter, and various other utilities."
 
-For the moment, there's only one wrapper for PDF2Text.
+For the moment, there's only one handler for PDF2Text.
 
-This library depends on `Symfony Process Component <https://github.com/symfony/process>`_
-and `Monolog <https://github.com/Seldaek/monolog>`_.
+This library depends on 
+`Symfony Process Component <https://github.com/symfony/process>`_ and 
+`Monolog <https://github.com/Seldaek/monolog>`_.
 
 Installation
 ------------
 
-We rely on `composer <http://getcomposer.org/>`_ to use this library. If you do
-no still use composer for your project, you can start with this ``composer.json``
-at the root of your project:
+PHP-XPDF relies on `composer <http://getcomposer.org/>`_. If you do not yet 
+use composer for your project, you can start with this ``composer.json`` at the 
+root of your project:
 
 .. code-block:: json
 
@@ -45,9 +46,8 @@ You now just have to autoload the library to use it :
     <?php
     require 'vendor/autoload.php';
 
-This is a very short intro to composer.
-If you ever experience an issue or want to know more about composer,
-you will find help on their  website
+This is a very short intro to composer. If you ever experience an issue or want 
+to know more about composer, you will find help on its dedicated website
 `http://getcomposer.org/ <http://getcomposer.org/>`_.
 
 PDF2Text
@@ -107,6 +107,8 @@ the ``setOutputEncoding`` method
     <?php
     $pdfToText->setOutputEncoding('ISO-8859-5');
 
+.. note:: The charset value should be an iconv compatible value.
+
 Extract page range
 ^^^^^^^^^^^^^^^^^^
 
@@ -150,7 +152,8 @@ Ask for a feature
 -----------------
 
 We would be glad you ask for a feature ! Feel free to add a feature request in
-the `issues manager <https://github.com/alchemy-fr/PHP-XPDF/issues>`_ on GitHub !
+the `issues manager <https://github.com/alchemy-fr/PHP-XPDF/issues>`_ on 
+GitHub !
 
 Contribute
 ----------
@@ -165,7 +168,7 @@ Run tests
 
 PHP-XPDF relies on `PHPUnit <http://www.phpunit.de/manual/current/en/>`_ for
 unit tests. To run tests on your system, ensure you have PHPUnit installed,
-and, at the root of PHP-XPDF (vendor/php-xpdf/php-xpdf), execute it :
+and, at the root of PHP-XPDF, execute it :
 
 .. code-block:: bash
 
@@ -181,4 +184,5 @@ Try it, it's awesome !
 License
 -------
 
-PHP-XPDF is licensed under the `MIT License <http://opensource.org/licenses/MIT>`_
+PHP-XPDF is licensed under the 
+`MIT License <http://opensource.org/licenses/MIT>`_
