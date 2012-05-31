@@ -11,6 +11,12 @@
 
 namespace XPDF\Exception;
 
+/**
+ * XPDF Invalid File Argument Exception
+ *
+ * @license MIT
+ * @author Romain Neutron <imprec@gmail.com>
+ */
 class InvalidFileArgumentException extends \InvalidArgumentException implements Exception
 {
 

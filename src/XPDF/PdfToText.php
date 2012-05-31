@@ -18,6 +18,11 @@ use Symfony\Component\Process\Process;
 /**
  * The PdfToText object.
  *
+ * This binary adapter is used to extract text from PDF with the PdfToText
+ * binary provided by XPDF.
+ *
+ * @see https://wikipedia.org/wiki/Pdftotext
+ * @license MIT
  * @author Romain Neutron <imprec@gmail.com>
  */
 class PdfToText
@@ -31,7 +36,7 @@ class PdfToText
      * Constructor
      *
      * @param string $binary The path to the `pdftotext` binary
-     * @param Logger $logger The logger
+     * @param Logger $logger A logger wich will log the events
      */
     public function __construct($binary, Logger $logger)
     {
@@ -50,10 +55,10 @@ class PdfToText
     }
 
     /**
-     * Opens a PDF file to extract the text
+     * Opens a PDF file in order to extract text
      *
-     * @param  string          $pathfile The path to the PDF file to extract
-     * @return \XPDF\PdfToText
+     * @param  string    $pathfile The path to the PDF file to extract
+     * @return PdfToText
      *
      * @throws Exception\InvalidFileArgumentException
      */
@@ -74,7 +79,7 @@ class PdfToText
     /**
      * Close the current open file
      *
-     * @return \XPDF\PdfToText
+     * @return PdfToText
      */
     public function close()
     {
@@ -88,8 +93,8 @@ class PdfToText
      * Set the output encoding. If the charset is invalid, the getText method
      * will fail.
      *
-     * @param  string          $charset The charset
-     * @return \XPDF\PdfToText
+     * @param  string    $charset A valid iconv charset
+     * @return PdfToText
      */
     public function setOuputEncoding($charset)
     {
@@ -101,7 +106,7 @@ class PdfToText
     /**
      * Get the ouput encoding, default is UTF-8
      *
-     * @return type
+     * @return string
      */
     public function getOuputEncoding()
     {
@@ -112,9 +117,9 @@ class PdfToText
      * Extract the text of the current open PDF file, if not page start/end
      * provided, etxract all pages
      *
-     * @param  int    $page_start The starting page number (first is 1)
-     * @param  int    $page_end   The ending page number
-     * @return string The extracted text
+     * @param  integer $page_start The starting page number (first is 1)
+     * @param  integer $page_end   The ending page number
+     * @return string  The extracted text
      *
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
@@ -137,7 +142,7 @@ class PdfToText
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $cmd .= ' -raw -nopgbrk -enc ' . $this->charset . ' -eol unix '
+        $cmd .= ' -raw -nopgbrk -enc UTF-8 -eol unix '
             . ' ' . escapeshellarg($this->pathfile)
             . ' ' . escapeshellarg($tmpFile);
 
@@ -171,18 +176,18 @@ class PdfToText
             throw new Exception\RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
         }
 
-        return $ret;
+        return iconv('utf-8', $this->charset, $ret);
     }
 
     /**
      * Look for pdftotext binary and return a new XPDF object
      *
-     * @param  \Monolog\Logger $logger The logger
-     * @return \XPDF\PdfToText
+     * @param  Logger    $logger The logger
+     * @return PdfToText
      *
      * @throws Exception\BinaryNotFoundException
      */
-    public static function load(\Monolog\Logger $logger)
+    public static function load(Logger $logger)
     {
         $finder = new ExecutableFinder();
 

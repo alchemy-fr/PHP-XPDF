@@ -11,6 +11,12 @@
 
 namespace XPDF\Exception;
 
+/**
+ * XPDF Logic Exception
+ *
+ * @license MIT
+ * @author Romain Neutron <imprec@gmail.com>
+ */
 class LogicException extends \LogicException implements Exception
 {
 

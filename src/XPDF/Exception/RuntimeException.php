@@ -11,6 +11,12 @@
 
 namespace XPDF\Exception;
 
+/**
+ * XPDF Runtime Exception
+ *
+ * @license MIT
+ * @author Romain Neutron <imprec@gmail.com>
+ */
 class RuntimeException extends \RuntimeException implements Exception
 {
 

@@ -11,6 +11,12 @@
 
 namespace XPDF\Exception;
 
+/**
+ * XPDF Exception Interface
+ *
+ * @license MIT
+ * @author Romain Neutron <imprec@gmail.com>
+ */
 interface Exception
 {
 
