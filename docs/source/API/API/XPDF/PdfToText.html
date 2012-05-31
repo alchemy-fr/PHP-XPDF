@@ -26,7 +26,8 @@
 
             <div class="description">
             <p>The PdfToText object.</p>
-            <p></p>
+            <p>This binary adapter is used to extract text from PDF with the PdfToText<br />
+ binary provided by XPDF.</p>
         </div>
     
     
@@ -60,7 +61,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_open">open</a>(string $pathfile)
-                    <p>Opens a PDF file to extract the text</p>
+                    <p>Opens a PDF file in order to extract text</p>
                 </td>
                 <td></td>
             </tr>
@@ -86,7 +87,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <abbr title="XPDF\type">type</abbr>
+                    string
                 </td>
                 <td class="last">
                     <a href="#method_getOuputEncoding">getOuputEncoding</a>()
@@ -99,7 +100,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_getText">getText</a>(int $page_start = null, int $page_end = null)
+                    <a href="#method_getText">getText</a>(integer $page_start = null, integer $page_end = null)
                     <p>Extract the text of the current open PDF file, if not page start/end provided, etxract all pages</p>
                 </td>
                 <td></td>
@@ -109,7 +110,7 @@
                     static&nbsp;<a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_load">load</a>(<abbr title="XPDF\Monolog\Logger">Logger</abbr> $logger)
+                    <a href="#method_load">load</a>(<abbr title="Monolog\Logger">Logger</abbr> $logger)
                     <p>Look for pdftotext binary and return a new XPDF object</p>
                 </td>
                 <td></td>
@@ -120,7 +121,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 36</div>
+        <div class="location">at line 41</div>
         <code>            public            
     <strong>__construct</strong>(string $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
     </h3>
@@ -139,7 +140,7 @@
                     <tr>
                 <td><abbr title="Monolog\Logger">Logger</abbr></td>
                 <td>$logger</td>
-                <td>The logger</td>
+                <td>A logger wich will log the events</td>
             </tr>
             </table>
 
@@ -150,7 +151,7 @@
     </div>
 
                 <h3 id="method___destruct">
-        <div class="location">at line 45</div>
+        <div class="location">at line 50</div>
         <code>            public            
     <strong>__destruct</strong>()</code>
     </h3>
@@ -165,12 +166,12 @@
     </div>
 
                 <h3 id="method_open">
-        <div class="location">at line 60</div>
+        <div class="location">at line 65</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>open</strong>(string $pathfile)</code>
     </h3>
     <div class="details">
-        <p>Opens a PDF file to extract the text</p>
+        <p>Opens a PDF file in order to extract text</p>
         <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -208,7 +209,7 @@
     </div>
 
                 <h3 id="method_close">
-        <div class="location">at line 79</div>
+        <div class="location">at line 84</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>close</strong>()</code>
     </h3>
@@ -232,7 +233,7 @@
     </div>
 
                 <h3 id="method_setOuputEncoding">
-        <div class="location">at line 94</div>
+        <div class="location">at line 99</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>setOuputEncoding</strong>(string $charset)</code>
     </h3>
@@ -247,7 +248,7 @@
                     <tr>
                 <td>string</td>
                 <td>$charset</td>
-                <td>The charset</td>
+                <td>The output charset</td>
             </tr>
             </table>
 
@@ -267,8 +268,8 @@
     </div>
 
                 <h3 id="method_getOuputEncoding">
-        <div class="location">at line 106</div>
-        <code>            public            <abbr title="XPDF\type">type</abbr>
+        <div class="location">at line 111</div>
+        <code>            public            string
     <strong>getOuputEncoding</strong>()</code>
     </h3>
     <div class="details">
@@ -280,7 +281,7 @@
 
                     <table>
         <tr>
-            <td><abbr title="XPDF\type">type</abbr></td>
+            <td>string</td>
             <td></td>
         </tr>
     </table>
@@ -291,9 +292,9 @@
     </div>
 
                 <h3 id="method_getText">
-        <div class="location">at line 122</div>
+        <div class="location">at line 127</div>
         <code>            public            string
-    <strong>getText</strong>(int $page_start = null, int $page_end = null)</code>
+    <strong>getText</strong>(integer $page_start = null, integer $page_end = null)</code>
     </h3>
     <div class="details">
         <p>Extract the text of the current open PDF file, if not page start/end provided, etxract all pages</p>
@@ -303,12 +304,12 @@
 
                     <table>
                     <tr>
-                <td>int</td>
+                <td>integer</td>
                 <td>$page_start</td>
                 <td>The starting page number (first is 1)</td>
             </tr>
                     <tr>
-                <td>int</td>
+                <td>integer</td>
                 <td>$page_end</td>
                 <td>The ending page number</td>
             </tr>
@@ -343,9 +344,9 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 185</div>
+        <div class="location">at line 190</div>
         <code>        static    public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
-    <strong>load</strong>(<abbr title="XPDF\Monolog\Logger">Logger</abbr> $logger)</code>
+    <strong>load</strong>(<abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
     </h3>
     <div class="details">
         <p>Look for pdftotext binary and return a new XPDF object</p>
@@ -355,7 +356,7 @@
 
                     <table>
                     <tr>
-                <td><abbr title="XPDF\Monolog\Logger">Logger</abbr></td>
+                <td><abbr title="Monolog\Logger">Logger</abbr></td>
                 <td>$logger</td>
                 <td>The logger</td>
             </tr>
