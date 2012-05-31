@@ -13,4 +13,4 @@ php:
 
 script:
   - phpunit
-  - sh -c "buildAPI.sh"
+  - ./buildAPI.sh
