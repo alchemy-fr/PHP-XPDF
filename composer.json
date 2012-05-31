@@ -1,8 +1,9 @@
 {
     "name": "php-xpdf/php-xpdf",
     "type": "library",
+    "version": "0.1.0",
     "description": "XPDF PHP, an Object Oriented library to manipulate XPDF",
-    "keywords": ["xpdf", "pdf", "extraction"],
+    "keywords": ["xpdf", "pdf"],
     "license": "MIT",
     "authors": [
     {
