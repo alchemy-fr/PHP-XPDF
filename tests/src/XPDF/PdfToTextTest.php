@@ -122,7 +122,7 @@ It tells about elephant\'s noze !
     public function testGetTextFail()
     {
         $this->object->open(__DIR__ . '/../../files/HelloWorld.pdf');
-        $this->object->setOuputEncoding('us-ascii');
+        $this->object->setOuputEncoding('ISO-8860');
         $this->object->getText();
     }
 

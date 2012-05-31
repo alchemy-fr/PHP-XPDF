@@ -93,7 +93,7 @@ class PdfToText
      * Set the output encoding. If the charset is invalid, the getText method
      * will fail.
      *
-     * @param  string    $charset A valid iconv charset
+     * @param  string    $charset The output charset
      * @return PdfToText
      */
     public function setOuputEncoding($charset)
@@ -142,7 +142,7 @@ class PdfToText
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $cmd .= ' -raw -nopgbrk -enc UTF-8 -eol unix '
+        $cmd .= ' -raw -nopgbrk -enc ' . escapeshellarg($this->charset) . ' -eol unix '
             . ' ' . escapeshellarg($this->pathfile)
             . ' ' . escapeshellarg($tmpFile);
 
@@ -154,7 +154,7 @@ class PdfToText
         try {
             $process->run();
         } catch (\Symfony\Component\Process\Exception\RuntimeException $e) {
-
+            
         }
 
         $ret = null;
@@ -176,7 +176,7 @@ class PdfToText
             throw new Exception\RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
         }
 
-        return iconv('utf-8', $this->charset, $ret);
+        return $ret;
     }
 
     /**
