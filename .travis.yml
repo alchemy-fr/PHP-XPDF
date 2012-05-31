@@ -14,4 +14,4 @@ php:
 
 script:
   - phpunit
-  - sh -c "cd docs && make clean && make html"
+  - sh -c "buildAPI.sh"
