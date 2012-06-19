@@ -158,14 +158,14 @@ class PdfToText
 
         $cmd = $this->binary;
 
-        if ($page_start || $this->pageQuantity) {
+        if ($page_start || $this->pageQuantity !== null) {
             $cmd .= ' -f ' . (int) $page_start;
         }
 
         if ($page_end) {
             $cmd .= ' -l ' . (int) $page_end;
         } elseif ($this->pageQuantity) {
-            $cmd .= ' -l ' . (int) $page_start + $this->pageQuantity;
+            $cmd .= ' -l ' . ((int) $page_start + $this->pageQuantity);
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
