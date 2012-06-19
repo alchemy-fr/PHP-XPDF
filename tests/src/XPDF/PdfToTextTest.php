@@ -46,7 +46,7 @@ class PdfToTextTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers XPDF\PdfToText::open
-     * @expectedException XPDF\Exception\InvalidFileArgumentException
+     * @expectedException XPDF\Exception\InvalidArgumentException
      */
     public function testOpenWrongFile()
     {

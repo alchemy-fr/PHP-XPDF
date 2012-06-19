@@ -30,6 +30,7 @@ class PdfToText
     protected $binary;
     protected $logger;
     protected $pathfile;
+    protected $pageQuantity;
     protected $charset = 'UTF-8';
 
     /**
@@ -55,12 +56,36 @@ class PdfToText
     }
 
     /**
+     *
+     * Set the default number of page to extract
+     * When extracting text, if no page end is provided and this value has been
+     * set, then the quantity will be limited.
+     *
+     * Set this value to null to reset it
+     *
+     * @param integer $page The numebr of page
+     *
+     * @return PdfToText
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setPageQuantity($pages)
+    {
+        if (null !== $pages && $pages < 1) {
+            throw new InvalidArgumentException('The quantity must be greater or equal to 1');
+        }
+
+        $this->pageQuantity = (int) $pages;
+
+        return $this;
+    }
+
+    /**
      * Opens a PDF file in order to extract text
      *
      * @param  string    $pathfile The path to the PDF file to extract
      * @return PdfToText
      *
-     * @throws Exception\InvalidFileArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function open($pathfile)
     {
@@ -68,7 +93,7 @@ class PdfToText
 
         if ( ! file_exists($pathfile)) {
             $this->logger->addError(sprintf('PdfToText file %s does not exists', $pathfile));
-            throw new Exception\InvalidFileArgumentException(sprintf('%s is not a valid file', $pathfile));
+            throw new Exception\InvalidArgumentException(sprintf('%s is not a valid file', $pathfile));
         }
 
         $this->pathfile = $pathfile;
@@ -133,11 +158,14 @@ class PdfToText
 
         $cmd = $this->binary;
 
-        if ($page_start) {
+        if ($page_start || $this->pageQuantity) {
             $cmd .= ' -f ' . (int) $page_start;
         }
+
         if ($page_end) {
             $cmd .= ' -l ' . (int) $page_end;
+        } elseif ($this->pageQuantity) {
+            $cmd .= ' -l ' . (int) $page_start + $this->pageQuantity;
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
@@ -154,7 +182,7 @@ class PdfToText
         try {
             $process->run();
         } catch (\Symfony\Component\Process\Exception\RuntimeException $e) {
-            
+
         }
 
         $ret = null;
