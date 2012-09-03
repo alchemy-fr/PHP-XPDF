@@ -12,8 +12,13 @@
 namespace XPDF;
 
 use Monolog\Logger;
+use XPDF\Exception\BinaryNotFoundException;
+use XPDF\Exception\InvalidArgumentException;
+use XPDF\Exception\LogicException;
+use XPDF\Exception\RuntimeException;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\RuntimeException as SymfonyRuntimeException;
 
 /**
  * The PdfToText object.
@@ -85,7 +90,7 @@ class PdfToText
      * @param  string    $pathfile The path to the PDF file to extract
      * @return PdfToText
      *
-     * @throws Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function open($pathfile)
     {
@@ -93,7 +98,7 @@ class PdfToText
 
         if ( ! file_exists($pathfile)) {
             $this->logger->addError(sprintf('PdfToText file %s does not exists', $pathfile));
-            throw new Exception\InvalidArgumentException(sprintf('%s is not a valid file', $pathfile));
+            throw new InvalidArgumentException(sprintf('%s is not a valid file', $pathfile));
         }
 
         $this->pathfile = $pathfile;
@@ -146,14 +151,14 @@ class PdfToText
      * @param  integer $page_end   The ending page number
      * @return string  The extracted text
      *
-     * @throws Exception\LogicException
-     * @throws Exception\RuntimeException
+     * @throws LogicException
+     * @throws RuntimeException
      */
     public function getText($page_start = null, $page_end = null)
     {
         if ( ! $this->pathfile) {
             $this->logger->addDebug('PdfToText no file open, unable to extract text');
-            throw new Exception\LogicException('You must open a file to get some text');
+            throw new LogicException('You must open a file to get some text');
         }
 
         $cmd = $this->binary;
@@ -181,7 +186,7 @@ class PdfToText
 
         try {
             $process->run();
-        } catch (\Symfony\Component\Process\Exception\RuntimeException $e) {
+        } catch (SymfonyRuntimeException $e) {
 
         }
 
@@ -201,7 +206,7 @@ class PdfToText
 
         if ( ! $success) {
             $this->logger->addDebug(sprintf('PdfToText command failed', $cmd));
-            throw new Exception\RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
+            throw new RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
         }
 
         return $ret;
@@ -227,7 +232,7 @@ class PdfToText
 
         $logger->addInfo('PdfToText not found');
 
-        throw new Exception\BinaryNotFoundException('Binary not found');
+        throw new BinaryNotFoundException('Binary not found');
     }
 
     /**

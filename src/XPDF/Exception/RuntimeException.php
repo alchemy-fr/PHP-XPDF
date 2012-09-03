@@ -17,7 +17,7 @@ namespace XPDF\Exception;
  * @license MIT
  * @author Romain Neutron <imprec@gmail.com>
  */
-class RuntimeException extends \RuntimeException implements Exception
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 
 }

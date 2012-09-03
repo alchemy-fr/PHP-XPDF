@@ -17,7 +17,7 @@ namespace XPDF\Exception;
  * @license MIT
  * @author Romain Neutron <imprec@gmail.com>
  */
-class BinaryNotFoundException extends \Exception implements Exception
+class BinaryNotFoundException extends \Exception implements ExceptionInterface
 {
 
 }

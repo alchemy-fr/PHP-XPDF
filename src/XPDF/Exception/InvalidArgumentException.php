@@ -17,7 +17,7 @@ namespace XPDF\Exception;
  * @license MIT
  * @author Romain Neutron <imprec@gmail.com>
  */
-class InvalidArgumentException extends \InvalidArgumentException implements Exception
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 
 }
