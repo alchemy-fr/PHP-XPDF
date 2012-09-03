@@ -6,7 +6,7 @@ use Monolog\Logger;
 use Monolog\Handler\NullHandler;
 use Silex\Application;
 
-class PdfToTextTest extends \PHPUnit_Framework_TestCase
+class XPDFServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     private function getApplication()
     {
