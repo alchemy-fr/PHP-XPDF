@@ -68,7 +68,7 @@ class PdfToText
      *
      * Set this value to null to reset it
      *
-     * @param integer $page The numebr of page
+     * @param integer $pages The numebr of page
      *
      * @return PdfToText
      * @throws Exception\InvalidArgumentException

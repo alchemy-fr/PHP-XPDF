@@ -1,7 +1,7 @@
 <?php
 
 /* tree.twig */
-class __TwigTemplate_7014b8427a52a016344f738b9a4aaab5 extends Twig_Template
+class __TwigTemplate_746bf165dd76b1f467f72a63c6718d70 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -17,7 +17,7 @@ class __TwigTemplate_7014b8427a52a016344f738b9a4aaab5 extends Twig_Template
     {
         // line 1
         echo "var tree = ";
-        echo twig_escape_filter($this->env, $this->getAttribute($this, "element", array(0 => $this->getContext($context, "tree")), "method"), "html", null, true);
+        echo $this->getAttribute($this, "element", array(0 => $this->getContext($context, "tree")), "method");
         echo "
 
 ";

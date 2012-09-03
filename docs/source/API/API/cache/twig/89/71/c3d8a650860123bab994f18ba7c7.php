@@ -1,7 +1,7 @@
 <?php
 
 /* pages/namespace.twig */
-class __TwigTemplate_f205c25824a1c9c06f80b613233ad94b extends Twig_Template
+class __TwigTemplate_8971c3d8a650860123bab994f18ba7c7 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -23,7 +23,7 @@ class __TwigTemplate_f205c25824a1c9c06f80b613233ad94b extends Twig_Template
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 3
-        $context["__internal_f205c25824a1c9c06f80b613233ad94b_1"] = $this->env->loadTemplate("macros.twig");
+        $context["__internal_68d18e37d310d669cde16ede54bbe2d101ed3516"] = $this->env->loadTemplate("macros.twig");
         $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -70,7 +70,7 @@ class __TwigTemplate_f205c25824a1c9c06f80b613233ad94b extends Twig_Template
                 echo "                <tr>
                     <td>";
                 // line 19
-                echo $context["__internal_f205c25824a1c9c06f80b613233ad94b_1"]->getclass_link($this->getContext($context, "class"));
+                echo $context["__internal_68d18e37d310d669cde16ede54bbe2d101ed3516"]->getclass_link($this->getContext($context, "class"));
                 echo "</td>
                     <td class=\"last\">";
                 // line 20
@@ -103,7 +103,7 @@ class __TwigTemplate_f205c25824a1c9c06f80b613233ad94b extends Twig_Template
                 echo "                <tr>
                     <td>";
                 // line 31
-                echo $context["__internal_f205c25824a1c9c06f80b613233ad94b_1"]->getclass_link($this->getContext($context, "interface"));
+                echo $context["__internal_68d18e37d310d669cde16ede54bbe2d101ed3516"]->getclass_link($this->getContext($context, "interface"));
                 echo "</td>
                     <td class=\"last\">";
                 // line 32
@@ -136,7 +136,7 @@ class __TwigTemplate_f205c25824a1c9c06f80b613233ad94b extends Twig_Template
                 echo "                <tr>
                     <td>";
                 // line 43
-                echo $context["__internal_f205c25824a1c9c06f80b613233ad94b_1"]->getclass_link($this->getContext($context, "exception"));
+                echo $context["__internal_68d18e37d310d669cde16ede54bbe2d101ed3516"]->getclass_link($this->getContext($context, "exception"));
                 echo "</td>
                     <td class=\"last\">";
                 // line 44

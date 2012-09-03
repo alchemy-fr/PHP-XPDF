@@ -60,7 +60,7 @@
                     <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setPageQuantity">setPageQuantity</a>($pages)
+                    <a href="#method_setPageQuantity">setPageQuantity</a>(integer $pages)
                     <p>Set the default number of page to extract When extracting text, if no page end is provided and this value has been set, then the quantity will be limited.</p>
                 </td>
                 <td></td>
@@ -131,7 +131,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 42</div>
+        <div class="location">at line 47</div>
         <code>            public            
     <strong>__construct</strong>(string $binary, <abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
     </h3>
@@ -161,7 +161,7 @@
     </div>
 
                 <h3 id="method___destruct">
-        <div class="location">at line 51</div>
+        <div class="location">at line 56</div>
         <code>            public            
     <strong>__destruct</strong>()</code>
     </h3>
@@ -176,9 +176,9 @@
     </div>
 
                 <h3 id="method_setPageQuantity">
-        <div class="location">at line 71</div>
+        <div class="location">at line 76</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
-    <strong>setPageQuantity</strong>($pages)</code>
+    <strong>setPageQuantity</strong>(integer $pages)</code>
     </h3>
     <div class="details">
         <p>Set the default number of page to extract When extracting text, if no page end is provided and this value has been set, then the quantity will be limited.</p>
@@ -188,9 +188,9 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>integer</td>
                 <td>$pages</td>
-                <td></td>
+                <td>The numebr of page</td>
             </tr>
             </table>
 
@@ -219,7 +219,7 @@
     </div>
 
                 <h3 id="method_open">
-        <div class="location">at line 90</div>
+        <div class="location">at line 95</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>open</strong>(string $pathfile)</code>
     </h3>
@@ -252,7 +252,7 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Exception\InvalidArgumentException">InvalidArgumentException</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td></td>
             </tr>
             </table>
@@ -262,7 +262,7 @@
     </div>
 
                 <h3 id="method_close">
-        <div class="location">at line 109</div>
+        <div class="location">at line 114</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>close</strong>()</code>
     </h3>
@@ -286,7 +286,7 @@
     </div>
 
                 <h3 id="method_setOuputEncoding">
-        <div class="location">at line 124</div>
+        <div class="location">at line 129</div>
         <code>            public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>setOuputEncoding</strong>(string $charset)</code>
     </h3>
@@ -321,7 +321,7 @@
     </div>
 
                 <h3 id="method_getOuputEncoding">
-        <div class="location">at line 136</div>
+        <div class="location">at line 141</div>
         <code>            public            string
     <strong>getOuputEncoding</strong>()</code>
     </h3>
@@ -345,7 +345,7 @@
     </div>
 
                 <h3 id="method_getText">
-        <div class="location">at line 152</div>
+        <div class="location">at line 157</div>
         <code>            public            string
     <strong>getText</strong>(integer $page_start = null, integer $page_end = null)</code>
     </h3>
@@ -383,11 +383,11 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Exception\LogicException">LogicException</abbr></td>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
                 <td></td>
             </tr>
                     <tr>
-                <td><abbr title="Exception\RuntimeException">RuntimeException</abbr></td>
+                <td><a href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
                 <td></td>
             </tr>
             </table>
@@ -397,7 +397,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 218</div>
+        <div class="location">at line 223</div>
         <code>        static    public            <a href="../XPDF/PdfToText.html"><abbr title="XPDF\PdfToText">PdfToText</abbr></a>
     <strong>load</strong>(<abbr title="Monolog\Logger">Logger</abbr> $logger)</code>
     </h3>

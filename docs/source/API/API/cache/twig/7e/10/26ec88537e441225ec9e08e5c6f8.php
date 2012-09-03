@@ -1,7 +1,7 @@
 <?php
 
 /* namespace.twig */
-class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
+class __TwigTemplate_7e1026ec88537e441225ec9e08e5c6f8 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -25,7 +25,7 @@ class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 3
-        $context["__internal_df09f7f96a2f1fe69d86f2eb6c9623f8_1"] = $this->env->loadTemplate("macros.twig");
+        $context["__internal_a46b438074c8aeb9b2fb3551daa50610ff3a024d"] = $this->env->loadTemplate("macros.twig");
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -72,7 +72,7 @@ class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
     {
         // line 21
         echo "    <h1>";
-        echo $context["__internal_df09f7f96a2f1fe69d86f2eb6c9623f8_1"]->getnamespace_link($this->getContext($context, "namespace"), array("target" => "main"));
+        echo $context["__internal_a46b438074c8aeb9b2fb3551daa50610ff3a024d"]->getnamespace_link($this->getContext($context, "namespace"), array("target" => "main"));
         echo "</h1>
 
     ";
@@ -87,7 +87,7 @@ class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
             foreach ($context['_seq'] as $context["_key"] => $context["class"]) {
                 // line 26
                 echo "                <li>";
-                echo $context["__internal_df09f7f96a2f1fe69d86f2eb6c9623f8_1"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
+                echo $context["__internal_a46b438074c8aeb9b2fb3551daa50610ff3a024d"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
                 echo "</li>
             ";
             }
@@ -113,7 +113,7 @@ class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
             foreach ($context['_seq'] as $context["_key"] => $context["class"]) {
                 // line 35
                 echo "                <li>";
-                echo $context["__internal_df09f7f96a2f1fe69d86f2eb6c9623f8_1"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
+                echo $context["__internal_a46b438074c8aeb9b2fb3551daa50610ff3a024d"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
                 echo "</li>
             ";
             }
@@ -139,7 +139,7 @@ class __TwigTemplate_df09f7f96a2f1fe69d86f2eb6c9623f8 extends Twig_Template
             foreach ($context['_seq'] as $context["_key"] => $context["class"]) {
                 // line 44
                 echo "                <li>";
-                echo $context["__internal_df09f7f96a2f1fe69d86f2eb6c9623f8_1"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
+                echo $context["__internal_a46b438074c8aeb9b2fb3551daa50610ff3a024d"]->getclass_link($this->getContext($context, "class"), array("target" => "main"));
                 echo "</li>
             ";
             }
