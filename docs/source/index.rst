@@ -4,22 +4,22 @@ PHP XPDF documentation
 Introduction
 ------------
 
-PHP-XPDF is an object oriented library to handle 
-`XPDF <http://www.foolabs.com/xpdf/>`_, an open source project self-described 
-as "a viewer for Portable Document Format files. The Xpdf project also includes 
+PHP-XPDF is an object oriented library to handle
+`XPDF <http://www.foolabs.com/xpdf/>`_, an open source project self-described
+as "a viewer for Portable Document Format files. The Xpdf project also includes
 a PDF text extractor, PDF-to-PostScript converter, and various other utilities."
 
 For the moment, there's only one handler for PDF2Text.
 
-This library depends on 
-`Symfony Process Component <https://github.com/symfony/process>`_ and 
+This library depends on
+`Symfony Process Component <https://github.com/symfony/process>`_ and
 `Monolog <https://github.com/Seldaek/monolog>`_.
 
 Installation
 ------------
 
-PHP-XPDF relies on `composer <http://getcomposer.org/>`_. If you do not yet 
-use composer for your project, you can start with this ``composer.json`` at the 
+PHP-XPDF relies on `composer <http://getcomposer.org/>`_. If you do not yet
+use composer for your project, you can start with this ``composer.json`` at the
 root of your project:
 
 .. code-block:: json
@@ -46,7 +46,7 @@ You now just have to autoload the library to use it :
     <?php
     require 'vendor/autoload.php';
 
-This is a very short intro to composer. If you ever experience an issue or want 
+This is a very short intro to composer. If you ever experience an issue or want
 to know more about composer, you will find help on its dedicated website
 `http://getcomposer.org/ <http://getcomposer.org/>`_.
 
@@ -120,6 +120,43 @@ You can restrict the text extraction on page range. For example to extract pages
     <?php
     $pdfToText->getText(3, 6);
 
+Silex Service Provider
+^^^^^^^^^^^^^^^^^^^^^^
+
+XPDF is bundled with a `Silex <http://silex.sensiolabs.org>`_ Service Provider.
+Use it is very simple :
+
+.. code-block:: php
+
+    <?php
+    use Silex\Application;
+    use XPDF\XPDFServiceProvider;
+
+    $app = new Application();
+    $app->register(new XPDFServiceProvider());
+
+    // You have access to PDF2Text
+    $app['xpdf.pdf2text']->open(...);
+
+
+You can, of course, customize it :
+
+.. code-block:: php
+
+    <?php
+    use Silex\Application;
+    use XPDF\XPDFServiceProvider;
+
+    $app = new Application();
+    $app->register(new XPDFServiceProvider(), array(
+        'xpdf.pdf2text.binary' => '/your/custom/binary',
+        'xpdf.logger'          => $my_logger,
+    ));
+
+    // You have access to PDF2Text
+    $app['xpdf.pdf2text']->open(...);
+
+
 Handling Exceptions
 -------------------
 
@@ -152,7 +189,7 @@ Ask for a feature
 -----------------
 
 We would be glad you ask for a feature ! Feel free to add a feature request in
-the `issues manager <https://github.com/alchemy-fr/PHP-XPDF/issues>`_ on 
+the `issues manager <https://github.com/alchemy-fr/PHP-XPDF/issues>`_ on
 GitHub !
 
 Contribute
@@ -184,5 +221,5 @@ Try it, it's awesome !
 License
 -------
 
-PHP-XPDF is licensed under the 
+PHP-XPDF is licensed under the
 `MIT License <http://opensource.org/licenses/MIT>`_
