@@ -9,7 +9,7 @@ before_script:
   - sudo apt-get autoremove
   - sudo apt-get clean
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
+  - php composer.phar install --dev
 
 php:
   - 5.3.3
