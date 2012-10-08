@@ -17,7 +17,7 @@ use XPDF\Exception\InvalidArgumentException;
 use XPDF\Exception\LogicException;
 use XPDF\Exception\RuntimeException;
 use Symfony\Component\Process\ExecutableFinder;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Process\Exception\RuntimeException as SymfonyRuntimeException;
 
 /**
@@ -161,28 +161,28 @@ class PdfToText
             throw new LogicException('You must open a file to get some text');
         }
 
-        $cmd = $this->binary;
+        $builder = ProcessBuilder::create(array($this->binary));
 
         if ($page_start || $this->pageQuantity !== null) {
-            $cmd .= ' -f ' . (int) $page_start;
+            $builder->add('-f')->add((int) $page_start);
         }
 
         if ($page_end) {
-            $cmd .= ' -l ' . (int) $page_end;
+            $builder->add('-l')->add((int) $page_end);
         } elseif ($this->pageQuantity) {
-            $cmd .= ' -l ' . ((int) $page_start + $this->pageQuantity);
+            $builder->add('-l')->add((int) $page_start + $this->pageQuantity);
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $cmd .= ' -raw -nopgbrk -enc ' . escapeshellarg($this->charset) . ' -eol unix '
-            . ' ' . escapeshellarg($this->pathfile)
-            . ' ' . escapeshellarg($tmpFile);
+        $builder->add('-raw')->add('-nopgbrk')
+            ->add('-enc')->add($this->charset)
+            ->add('-eol')->add('unix')
+            ->add($this->pathfile)->add($tmpFile);
 
-        $this->logger->addInfo(sprintf('PdfToText executing %s', $cmd));
+        $process = $builder->getProcess();
 
-        $process = new Process($cmd);
-        $success = false;
+        $this->logger->addInfo(sprintf('PdfToText executing %s', $process->getCommandline()));
 
         try {
             $process->run();
@@ -192,8 +192,7 @@ class PdfToText
 
         $ret = null;
 
-        if ($process->isSuccessful()) {
-            $success = true;
+        if (true === $success = $process->isSuccessful()) {
             $ret = file_get_contents($tmpFile);
             $this->logger->addDebug(sprintf('PdfToText command success, result is %d long', strlen($ret)));
         } else {
@@ -205,7 +204,7 @@ class PdfToText
         }
 
         if ( ! $success) {
-            $this->logger->addDebug(sprintf('PdfToText command failed', $cmd));
+            $this->logger->addDebug(sprintf('PdfToText command failed', $process->getCommandline()));
             throw new RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
         }
 
