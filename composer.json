@@ -19,14 +19,13 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/process": ">2.0",
-        "monolog/monolog": "1.0.*"
+        "symfony/process": "~2",
+        "monolog/monolog": "~1"
     },
-    "minimum-stability": "dev",
     "require-dev": {
-        "fabpot/php-cs-fixer": "dev-master",
-        "sami/sami": "dev-master",
-        "silex/silex": "dev-master"
+        "fabpot/php-cs-fixer": "dev-master@dev",
+        "sami/sami": "dev-master@dev",
+        "silex/silex": "1.0.x@dev"
     },
     "autoload": {
         "psr-0": {
