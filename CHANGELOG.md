@@ -1,10 +1,10 @@
 CHANGELOG
 ---------
 
-* 0.1.1 (01-30-2013)
+* 0.1.1 (01-31-2013)
 
   * Remove unstable dependencies
-  * allow wider version intervals for dependencies
+  * Allow wider version intervals for dependencies
 
 * 0.1.0 (05-31-2012)
 
