@@ -2,8 +2,6 @@
 
 namespace XPDF;
 
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -12,23 +10,25 @@ class XPDFServiceProvider implements ServiceProviderInterface
 
     public function register(Application $app)
     {
-        $app['xpdf.pdf2text.binary'] = null;
+        $app['xpdf.configuration'] = array();
+        $app['xpdf.default.configuration'] = array(
+            'pdftotext.timeout'  => 60,
+            'pdftotext.binaries' => 'pdftotext',
+        );
         $app['xpdf.logger'] = null;
 
-        $app['xpdf.pdf2text'] = $app->share(function(Application $app) {
+        $app['xpdf.configuration.build'] = $app->share(function (Application $app) {
+            return array_replace($app['xpdf.default.configuration'], $app['xpdf.configuration']);
+        });
 
-            if ($app['xpdf.logger']) {
-                $logger = $app['xpdf.logger'];
-            } else {
-                $logger = new Logger('xpdf');
-                $logger->pushHandler(new NullHandler());
+        $app['xpdf.pdftotext'] = $app->share(function(Application $app) {
+            $configuration = $app['xpdf.configuration.build'];
+
+            if (isset($configuration['pdftotext.timeout'])) {
+                $configuration['timeout'] = $configuration['pdftotext.timeout'];
             }
 
-            if ($app['xpdf.pdf2text.binary']) {
-                return new PdfToText($app['xpdf.pdf2text.binary'], $logger);
-            } else {
-                return PdfToText::load($logger);
-            }
+            return PdfToText::create($configuration, $app['xpdf.logger']);
         });
     }
 

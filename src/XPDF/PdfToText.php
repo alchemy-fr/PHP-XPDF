@@ -11,14 +11,15 @@
 
 namespace XPDF;
 
-use Monolog\Logger;
-use XPDF\Exception\BinaryNotFoundException;
+use Alchemy\BinaryDriver\AbstractBinary;
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use Alchemy\BinaryDriver\Exception\ExecutableNotFoundException;
+use Alchemy\BinaryDriver\Configuration;
+use Alchemy\BinaryDriver\ConfigurationInterface;
+use Psr\Log\LoggerInterface;
 use XPDF\Exception\InvalidArgumentException;
-use XPDF\Exception\LogicException;
 use XPDF\Exception\RuntimeException;
-use Symfony\Component\Process\ExecutableFinder;
-use Symfony\Component\Process\ProcessBuilder;
-use Symfony\Component\Process\Exception\RuntimeException as SymfonyRuntimeException;
+use XPDF\Exception\BinaryNotFoundException;
 
 /**
  * The PdfToText object.
@@ -28,99 +29,21 @@ use Symfony\Component\Process\Exception\RuntimeException as SymfonyRuntimeExcept
  *
  * @see https://wikipedia.org/wiki/Pdftotext
  * @license MIT
- * @author Romain Neutron <imprec@gmail.com>
  */
-class PdfToText
+class PdfToText extends AbstractBinary
 {
-    protected $binary;
-    protected $logger;
-    protected $pathfile;
-    protected $pageQuantity;
-    protected $charset = 'UTF-8';
+    private $charset = 'UTF-8';
 
     /**
-     * Constructor
-     *
-     * @param string $binary The path to the `pdftotext` binary
-     * @param Logger $logger A logger wich will log the events
+     * {@inheritdoc}
      */
-    public function __construct($binary, Logger $logger)
+    public function getName()
     {
-        $this->binary = $binary;
-        $this->logger = $logger;
+        return 'pdftotext';
     }
 
     /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        $this->close();
-        $this->logger->addDebug('Destructing PdfToText');
-        $this->binary = $this->logger = null;
-    }
-
-    /**
-     *
-     * Set the default number of page to extract
-     * When extracting text, if no page end is provided and this value has been
-     * set, then the quantity will be limited.
-     *
-     * Set this value to null to reset it
-     *
-     * @param integer $pages The numebr of page
-     *
-     * @return PdfToText
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setPageQuantity($pages)
-    {
-        if (null !== $pages && $pages < 1) {
-            throw new InvalidArgumentException('The quantity must be greater or equal to 1');
-        }
-
-        $this->pageQuantity = (int) $pages;
-
-        return $this;
-    }
-
-    /**
-     * Opens a PDF file in order to extract text
-     *
-     * @param  string    $pathfile The path to the PDF file to extract
-     * @return PdfToText
-     *
-     * @throws InvalidArgumentException
-     */
-    public function open($pathfile)
-    {
-        $this->logger->addInfo(sprintf('PdfToText opens %s', $pathfile));
-
-        if ( ! file_exists($pathfile)) {
-            $this->logger->addError(sprintf('PdfToText file %s does not exists', $pathfile));
-            throw new InvalidArgumentException(sprintf('%s is not a valid file', $pathfile));
-        }
-
-        $this->pathfile = $pathfile;
-
-        return $this;
-    }
-
-    /**
-     * Close the current open file
-     *
-     * @return PdfToText
-     */
-    public function close()
-    {
-        $this->logger->addInfo(sprintf('PdfToText closes %s', $this->pathfile));
-        $this->pathfile = null;
-
-        return $this;
-    }
-
-    /**
-     * Set the output encoding. If the charset is invalid, the getText method
+     * Sets the output encoding. If the charset is invalid, the getText method
      * will fail.
      *
      * @param  string    $charset The output charset
@@ -134,7 +57,7 @@ class PdfToText
     }
 
     /**
-     * Get the ouput encoding, default is UTF-8
+     * Gets the ouput encoding, default is UTF-8
      *
      * @return string
      */
@@ -144,103 +67,83 @@ class PdfToText
     }
 
     /**
-     * Extract the text of the current open PDF file, if not page start/end
-     * provided, etxract all pages
+     * Extracts the text of the current open PDF file, if not page start/end
+     * provided, etxract all pages.
      *
      * @param  integer $page_start The starting page number (first is 1)
      * @param  integer $page_end   The ending page number
      * @return string  The extracted text
      *
-     * @throws LogicException
+     * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function getText($page_start = null, $page_end = null)
+    public function getText($pathfile, $page_start = null, $page_end = null)
     {
-        if ( ! $this->pathfile) {
-            $this->logger->addDebug('PdfToText no file open, unable to extract text');
-            throw new LogicException('You must open a file to get some text');
+        if ( ! file_exists($pathfile)) {
+            throw new InvalidArgumentException(sprintf('%s is not a valid file', $pathfile));
         }
 
-        $builder = ProcessBuilder::create(array($this->binary));
+        $commands = array();
 
-        if ($page_start || $this->pageQuantity !== null) {
-            $builder->add('-f')->add((int) $page_start);
+        if ($page_start) {
+            $commands[] = '-f';
+            $commands[] = (int) $page_start;
         }
 
         if ($page_end) {
-            $builder->add('-l')->add((int) $page_end);
-        } elseif ($this->pageQuantity) {
-            $builder->add('-l')->add((int) $page_start + $this->pageQuantity);
+            $commands[] = '-l';
+            $commands[] = (int) $page_end;
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $builder->add('-raw')->add('-nopgbrk')
-            ->add('-enc')->add($this->charset)
-            ->add('-eol')->add('unix')
-            ->add($this->pathfile)->add($tmpFile);
-
-        $process = $builder->getProcess();
-
-        $this->logger->addInfo(sprintf('PdfToText executing %s', $process->getCommandline()));
+        $commands[] = '-raw';
+        $commands[] = '-nopgbrk';
+        $commands[] = '-enc';
+        $commands[] = $this->charset;
+        $commands[] = '-eol';
+        $commands[] = '-unix';
+        $commands[] = $pathfile;
+        $commands[] = $tmpFile;
 
         try {
-            $process->run();
-        } catch (SymfonyRuntimeException $e) {
-
-        }
-
-        $ret = null;
-
-        if (true === $success = $process->isSuccessful()) {
+            $this->command($commands);
             $ret = file_get_contents($tmpFile);
-            $this->logger->addDebug(sprintf('PdfToText command success, result is %d long', strlen($ret)));
-        } else {
-            $this->logger->addError(sprintf('Process failed : %s', $process->getErrorOutput()));
-        }
 
-        if (is_writable($tmpFile)) {
-            unlink($tmpFile);
-        }
-
-        if ( ! $success) {
-            $this->logger->addDebug(sprintf('PdfToText command failed', $process->getCommandline()));
-            throw new RuntimeException('Unable to extract text : ' . $process->getErrorOutput());
+            if (is_writable($tmpFile)) {
+                unlink($tmpFile);
+            }
+        } catch (ExecutionFailureException $e) {
+            throw new RuntimeException('Unale to extract text', $e->getCode(), $e);
         }
 
         return $ret;
     }
 
     /**
-     * Look for pdftotext binary and return a new XPDF object
+     * Factory for PdfToText
      *
-     * @param  Logger    $logger The logger
+     * @param array|Configuration $configuration
+     * @param LoggerInterface     $logger
+     *
      * @return PdfToText
-     *
-     * @throws Exception\BinaryNotFoundException
      */
-    public static function load(Logger $logger)
+    public static function create($configuration = array(), LoggerInterface $logger = null)
     {
-        $finder = new ExecutableFinder();
-
-        if (null !== $binary = $finder->find(static::getBinaryName())) {
-            $logger->addInfo(sprintf('PdfToText loading with binary %s', $binary));
-
-            return new static($binary, $logger);
+        if (!$configuration instanceof ConfigurationInterface) {
+            $configuration = new Configuration($configuration);
         }
 
-        $logger->addInfo('PdfToText not found');
+        $binaries = $configuration->get('pdftotext.binaries', 'pdftotext');
 
-        throw new BinaryNotFoundException('Binary not found');
-    }
+        if (!$configuration->has('timeout')) {
+            $configuration->set('timeout', 60);
+        }
 
-    /**
-     * Return the binary name
-     *
-     * @return string
-     */
-    protected static function getBinaryName()
-    {
-        return 'pdftotext';
+        try {
+            return static::load($binaries, $logger, $configuration);
+        } catch (ExecutableNotFoundException $e) {
+            throw new BinaryNotFoundException('Unable to find pdftotext', $e->getCode(), $e);
+        }
     }
 }

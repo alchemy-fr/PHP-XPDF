@@ -2,22 +2,34 @@
 
 namespace XPDF;
 
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Silex\Application;
+use Symfony\Component\Process\ExecutableFinder;
 
 class XPDFServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
-    private function getApplication()
-    {
-        return new Application;
-    }
-
     public function testInit()
     {
-        $app = $this->getApplication();
-        $app->register(new XPDFServiceProvider());
+        $finder = new ExecutableFinder();
+        $php = $finder->find('php');
 
-        $this->assertInstanceOf('\\XPDF\\PdfToText', $app['xpdf.pdf2text']);
+        if (null === $php) {
+            $this->markTestSkipped('Unable to find PHP binary, required for this test');
+        }
+
+        $logger = $this->getMock('Psr\Log\LoggerInterface');
+
+        $app = new Application();
+        $app->register(new XPDFServiceProvider(), array(
+            'xpdf.configuration' => array(
+                'pdftotext.timeout'  => 42,
+                'pdftotext.binaries' => $php,
+            ),
+            'xpdf.logger' => $logger,
+        ));
+
+        $this->assertInstanceOf('XPDF\PdfToText', $app['xpdf.pdftotext']);
+        $this->assertEquals(42, $app['xpdf.pdftotext']->getProcessBuilderFactory()->getTimeout());
+        $this->assertEquals($logger, $app['xpdf.pdftotext']->getProcessRunner()->getLogger());
+        $this->assertEquals($php, $app['xpdf.pdftotext']->getProcessBuilderFactory()->getBinary());
     }
 }
