@@ -1,7 +1,8 @@
 <?php
 
-namespace XPDF;
+namespace XPDF\Tests;
 
+use XPDF\PdfToText;
 use Symfony\Component\Process\ExecutableFinder;
 
 class PdfToTextTest extends \PHPUnit_Framework_TestCase

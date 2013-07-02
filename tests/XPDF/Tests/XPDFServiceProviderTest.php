@@ -1,7 +1,8 @@
 <?php
 
-namespace XPDF;
+namespace XPDF\Tests;
 
+use XPDF\XPDFServiceProvider;
 use Silex\Application;
 use Symfony\Component\Process\ExecutableFinder;
 
