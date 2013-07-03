@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.2.1 (07-xx-2013)
+* 0.2.1 (07-03-2013)
 
   * Revert `PdfTotext::setPageQuantity`
 
