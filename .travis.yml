@@ -1,21 +1,17 @@
 language: php
 
-services: []
-
 before_script:
-  - sudo apt-get update
   - sudo apt-get install -y xpdf
   - sudo easy_install sphinx
-  - sudo apt-get autoremove
-  - sudo apt-get clean
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - composer self-update
+  - composer install --dev --prefer-source
 
 php:
   - 5.3.3
   - 5.3
   - 5.4
+  - 5.5
 
 script:
-  - phpunit
+  - vendor/bin/phpunit
   - ./buildAPI.sh
