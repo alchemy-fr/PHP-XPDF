@@ -70,9 +70,11 @@ class PdfToText extends AbstractBinary
      * Extracts the text of the current open PDF file, if not page start/end
      * provided, etxract all pages.
      *
-     * @param  integer $page_start The starting page number (first is 1)
-     * @param  integer $page_end   The ending page number
-     * @return string  The extracted text
+     * @param string  $pathfile   The path to the PDF file
+     * @param integer $page_start The starting page number (first is 1)
+     * @param integer $page_end   The ending page number
+     *
+     * @return string The extracted text
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
