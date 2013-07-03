@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+* 0.2.1 (07-xx-2013)
+
+  * Revert `PdfTotext::setPageQuantity`
+
 * 0.2.0 (07-03-2013)
 
   * BC Break : `PdfToText::open` and `PdftoText::close` methods are removed. PdfTotext is now a service.

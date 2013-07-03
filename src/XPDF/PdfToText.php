@@ -33,6 +33,7 @@ use XPDF\Exception\BinaryNotFoundException;
 class PdfToText extends AbstractBinary
 {
     private $charset = 'UTF-8';
+    private $pages;
 
     /**
      * {@inheritdoc}
@@ -67,6 +68,24 @@ class PdfToText extends AbstractBinary
     }
 
     /**
+     * Sets a quantity of page to extract by default
+     *
+     * @param integer $pages
+     *
+     * @return PdfToText
+     */
+    public function setPageQuantity($pages)
+    {
+        if (0 >= $pages) {
+            throw new InvalidArgumentException('Page quantity must be a positive value');
+        }
+
+        $this->pages = $pages;
+
+        return $this;
+    }
+
+    /**
      * Extracts the text of the current open PDF file, if not page start/end
      * provided, etxract all pages.
      *
@@ -87,14 +106,16 @@ class PdfToText extends AbstractBinary
 
         $commands = array();
 
-        if ($page_start) {
+        if (null !== $page_start) {
             $commands[] = '-f';
             $commands[] = (int) $page_start;
         }
-
-        if ($page_end) {
+        if (null !== $page_end) {
             $commands[] = '-l';
             $commands[] = (int) $page_end;
+        } elseif (null !== $this->pages) {
+            $commands[] = '-l';
+            $commands[] = (int) $page_start + $this->pages;
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');

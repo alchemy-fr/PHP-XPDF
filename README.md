@@ -58,6 +58,13 @@ You can optionally extract from a page to another page.
 $text = $pdtTotext->getText('document.pdf', $from = 1, $to = 4);
 ```
 
+You can also predefined how much pages would be extracted on any call.
+
+```php
+$pdtTotext->setpageQuantity(2);
+$pdtTotext->getText('document.pdf'); // extracts page 1 and 2
+```
+
 ### Use with Silex
 
 A [Silex](http://silex.sensiolabs.org) service provider is available

@@ -44,6 +44,25 @@ It tells about elephant\'s noze !
         $this->assertEquals('', $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2));
     }
 
+    public function testGetTextWithPageQuantity()
+    {
+        $text = 'This is an UTF-8 encoded string : « Un éléphant ça trompe énormément ! »
+It tells about elephant\'s noze !
+';
+        $pdfToText = PdfToText::create();
+        $pdfToText->setPageQuantity(1);
+        $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf'));
+    }
+
+    /**
+     * @expectedException XPDF\Exception\InvalidArgumentException
+     */
+    public function testInvalidPageQuantity()
+    {
+        $pdfToText = PdfToText::create();
+        $pdfToText->setPageQuantity(0);
+    }
+
     public function testCreate()
     {
         $finder = new ExecutableFinder();
