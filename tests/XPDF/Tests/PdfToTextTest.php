@@ -16,6 +16,23 @@ class PdfToTextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ascii', $pdfToText->getOuputEncoding());
     }
 
+    /**
+     * @expectedException XPDF\Exception\BinaryNotFoundException
+     */
+    public function testBinaryNotFound()
+    {
+        PdfToText::create(array('pdftotext.binaries' => '/path/to/nowhere'));
+    }
+
+    /**
+     * @expectedException XPDF\Exception\InvalidArgumentException
+     */
+    public function testGetTextInvalidFile()
+    {
+        $pdfToText = PdfToText::create();
+        $pdfToText->getText('/path/to/nowhere');
+    }
+
     public function testGetText()
     {
         $text = 'This is an UTF-8 encoded string : « Un éléphant ça trompe énormément ! »

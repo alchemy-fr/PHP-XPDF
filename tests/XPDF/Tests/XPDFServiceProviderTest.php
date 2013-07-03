@@ -27,6 +27,7 @@ class XPDFServiceProviderTest extends \PHPUnit_Framework_TestCase
             ),
             'xpdf.logger' => $logger,
         ));
+        $app->boot();
 
         $this->assertInstanceOf('XPDF\PdfToText', $app['xpdf.pdftotext']);
         $this->assertEquals(42, $app['xpdf.pdftotext']->getProcessBuilderFactory()->getTimeout());
