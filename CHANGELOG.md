@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-* 0.2.0 (xx-xx-2013)
+* 0.2.0 (07-03-2013)
 
   * BC Break : `PdfToText::open` and `PdftoText::close` methods are removed. PdfTotext is now a service.
   * Use alchemy/binary-adapter as driver base.
