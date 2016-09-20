@@ -51,7 +51,7 @@ class PdfToText extends AbstractBinary
      * @param  string    $charset The output charset
      * @return PdfToText
      */
-    public function setOuputEncoding($charset)
+    public function setOutputEncoding($charset)
     {
         $this->charset = $charset;
 
@@ -63,9 +63,30 @@ class PdfToText extends AbstractBinary
      *
      * @return string
      */
-    public function getOuputEncoding()
+    public function getOutputEncoding()
     {
         return $this->charset;
+    }
+
+    /**
+     * @deprecated Exists only for backwards-compatibility.
+     * @see  PdfToText::setOutputEncoding()
+     * @param  string    $charset The output charset
+     * @return PdfToText
+     */
+    public function setOuputEncoding($charset)
+    {
+        return $this->setOutputEncoding($charset);
+    }
+
+    /**
+     * @deprecated Exists only for backwards-compatibility.
+     * @see  PdfToText::getOutputEncoding()
+     * @return string
+     */
+    public function getOuputEncoding()
+    {
+        return $this->getOutputEncoding();
     }
 
     /**
