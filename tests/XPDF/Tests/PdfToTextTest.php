@@ -41,7 +41,6 @@ It tells about elephant\'s noze !
         $pdfToText = PdfToText::create();
         $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf'));
         $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 1, 1));
-        $this->assertEquals('', $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2));
     }
 
     public function testGetTextWithPageQuantity()
@@ -52,6 +51,15 @@ It tells about elephant\'s noze !
         $pdfToText = PdfToText::create();
         $pdfToText->setPageQuantity(1);
         $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf'));
+    }
+
+    /**
+     * @expectedException XPDF\Exception\RuntimeException
+     */
+    public function testInvalidPageParams()
+    {
+        $pdfToText = PdfToText::create();
+        $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2);
     }
 
     /**

@@ -116,7 +116,7 @@ class PdfToText extends AbstractBinary
 
     /**
      * Extracts the text of the current open PDF file, if not page start/end
-     * provided, etxract all pages.
+     * provided, extract all pages.
      *
      * @param string  $pathfile   The path to the PDF file
      * @param integer $page_start The starting page number (first is 1)
@@ -166,7 +166,7 @@ class PdfToText extends AbstractBinary
                 unlink($tmpFile);
             }
         } catch (ExecutionFailureException $e) {
-            throw new RuntimeException('Unale to extract text', $e->getCode(), $e);
+            throw new RuntimeException('Unable to extract text', $e->getCode(), $e);
         }
 
         return $ret;
