@@ -135,7 +135,9 @@ class PdfImages extends AbstractBinary
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $commands[] = $this->output_format;
+        if ($this->output_format) {
+            $commands[] = $this->output_format;
+        }
         $commands[] = $pathfile;
         $commands[] = $tmpFile;
 
