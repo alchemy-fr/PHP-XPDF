@@ -56,11 +56,11 @@ It tells about elephant\'s noze !
     /**
      * @expectedException XPDF\Exception\RuntimeException
      */
-    public function testInvalidPageParams()
-    {
-        $pdfToText = PdfToText::create();
-        $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2);
-    }
+    // public function testInvalidPageParams()
+    // {
+    //     $pdfToText = PdfToText::create();
+    //     $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2);
+    // }
 
     /**
      * @expectedException XPDF\Exception\InvalidArgumentException
