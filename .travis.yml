@@ -1,7 +1,7 @@
 language: php
 
 before_script:
-  - sudo apt-get install -y xpdf
+  - sudo apt-get install -y poppler-utils
   - sudo easy_install sphinx
   - composer self-update
   - composer install --dev --prefer-source
