@@ -7,7 +7,16 @@ use Symfony\Component\Process\ExecutableFinder;
 
 class PdfToTextTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetOuputEncoding()
+    public function testSetOutputEncoding()
+    {
+        $pdfToText = PdfToText::create();
+
+        $this->assertEquals('UTF-8', $pdfToText->getOutputEncoding());
+        $pdfToText->setOutputEncoding('ascii');
+        $this->assertEquals('ascii', $pdfToText->getOutputEncoding());
+    }
+
+    public function testDeprecatedSetOuputEncoding()
     {
         $pdfToText = PdfToText::create();
 
