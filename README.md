@@ -88,6 +88,26 @@ $app->register(new XPDF\XPDFServiceProvider(), array(
 ));
 ```
 
+### Use with Laravel 5
+
+A [Laravel 5](http://laravel.com/) service provider is available
+
+Publish the package config files:
+
+    php artisan vendor:publish
+
+You will also need to add the service provider and optionally the facade alias to your `app/config/app.php`:
+
+```php
+'providers' => array(
+  'XPDF\LaravelXPDFServiceProvider'
+)
+
+'aliases' => array(
+  'PdfToText' => 'XPDF\Facades\PdfToText'
+),
+```
+
 ## License
 
 This project is licensed under the [MIT license](http://opensource.org/licenses/MIT).
