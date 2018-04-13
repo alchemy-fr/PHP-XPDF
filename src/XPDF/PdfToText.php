@@ -154,7 +154,7 @@ class PdfToText extends AbstractBinary
         $commands[] = '-enc';
         $commands[] = $this->charset;
         $commands[] = '-eol';
-        $commands[] = '-unix';
+        $commands[] = 'unix';
         $commands[] = $pathfile;
         $commands[] = $tmpFile;
 
@@ -176,9 +176,10 @@ class PdfToText extends AbstractBinary
      * Factory for PdfToText
      *
      * @param array|Configuration $configuration
-     * @param LoggerInterface     $logger
+     * @param LoggerInterface $logger
      *
      * @return PdfToText
+     * @throws BinaryNotFoundException
      */
     public static function create($configuration = array(), LoggerInterface $logger = null)
     {

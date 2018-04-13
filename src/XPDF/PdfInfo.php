@@ -70,7 +70,7 @@ class PdfInfo extends AbstractBinary
 
         try {
             $output = $this->command($commands);
-            $this->data = $this->_parseOutputIntoData($output);
+            $this->data = $this->parseOutputIntoData($output);
             return $this->data;
         } catch (ExecutionFailureException $e) {
             throw new RuntimeException('Unale to extract text', $e->getCode(), $e);
@@ -81,9 +81,10 @@ class PdfInfo extends AbstractBinary
      * Factory for PdfInfo
      *
      * @param array|Configuration $configuration
-     * @param LoggerInterface     $logger
+     * @param LoggerInterface $logger
      *
      * @return PdfInfo
+     * @throws BinaryNotFoundException
      */
     public static function create($configuration = array(), LoggerInterface $logger = null)
     {

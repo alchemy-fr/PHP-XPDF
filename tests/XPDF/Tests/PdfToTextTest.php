@@ -42,7 +42,15 @@ It tells about elephant\'s noze !
         $pdfToText = PdfToText::create();
         $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf'));
         $this->assertEquals($text, $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 1, 1));
-        $this->assertEquals('', $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2));
+    }
+
+    /**
+     * @expectedException XPDF\Exception\RuntimeException
+     */
+    public function testGetTextInvalidPage()
+    {
+        $pdfToText = PdfToText::create();
+        $pdfToText->getText(__DIR__ . '/../../files/HelloWorld.pdf', 2, 2);
     }
 
     public function testGetTextWithPageQuantity()
@@ -73,7 +81,7 @@ It tells about elephant\'s noze !
             $this->markTestSkipped('Unable to find PHP binary, required for this test');
         }
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
 
         $pdfToText = PdfToText::create(array('pdftotext.binaries' => $php, 'timeout' => 42), $logger);
         $this->assertInstanceOf('XPDF\PdfToText', $pdfToText);

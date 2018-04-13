@@ -18,7 +18,7 @@ class XPDFServiceProviderTest extends TestCase
             $this->markTestSkipped('Unable to find PHP binary, required for this test');
         }
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
 
         $app = new Application();
         $app->register(new XPDFServiceProvider(), array(
