@@ -21,7 +21,7 @@
         "alchemy/binary-driver" : "~1.5"
     },
     "require-dev": {
-        "sami/sami"           : "~3.0",
+        "sami/sami"           : "~4.0",
         "silex/silex"         : "~2.0",
         "phpunit/phpunit"     : "~6.0"
     },
