@@ -47,7 +47,7 @@ class PdfInfo extends AbstractBinary
     }
 
     /**
-     * Extracts the information of the current open PDF file, 
+     * Extracts the information of the current open PDF file,
      *
      * @param string  $pathfile   The path to the PDF file
      *
@@ -103,12 +103,12 @@ class PdfInfo extends AbstractBinary
             throw new BinaryNotFoundException('Unable to find pdfinfo', $e->getCode(), $e);
         }
     }
-    
+
 
     /**
-     * Parse output string from pdfinfo command into associative array	 
+     * Parse output string from pdfinfo command into associative array
      *
-     * @param String $output 
+     * @param String $output
      *
      * @return array
      */
@@ -121,5 +121,9 @@ class PdfInfo extends AbstractBinary
             $data[$keyValue[0]] = trim($keyValue[1]);
         }
         return $data;
+    }
+
+    private function _parseOutputIntoData($output) {
+        $this->parseOutputIntoData($output);
     }
 }
