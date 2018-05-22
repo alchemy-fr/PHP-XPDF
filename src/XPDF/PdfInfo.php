@@ -122,4 +122,8 @@ class PdfInfo extends AbstractBinary
         }
         return $data;
     }
+
+    private function _parseOutputIntoData($output) {
+        return $this->parseOutputIntoData($output);
+    }
 }

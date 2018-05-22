@@ -4,8 +4,9 @@ namespace XPDF\Tests;
 
 use XPDF\PdfToText;
 use Symfony\Component\Process\ExecutableFinder;
+use \PHPUnit\Framework\TestCase;
 
-class PdfToTextTest extends \PHPUnit_Framework_TestCase
+class PdfToTextTest extends TestCase
 {
     public function testSetOuputEncoding()
     {

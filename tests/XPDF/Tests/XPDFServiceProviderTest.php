@@ -5,8 +5,9 @@ namespace XPDF\Tests;
 use XPDF\XPDFServiceProvider;
 use Silex\Application;
 use Symfony\Component\Process\ExecutableFinder;
+use \PHPUnit\Framework\TestCase;
 
-class XPDFServiceProviderTest extends \PHPUnit_Framework_TestCase
+class XPDFServiceProviderTest extends TestCase
 {
     public function testInit()
     {
