@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="451ab4e1-7c07-47b4-bb36-b6a42afb0ff7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/XPDF/PdfInfo.php" afterPath="$PROJECT_DIR$/src/XPDF/PdfInfo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/XPDF/XPDFServiceProvider.php" afterPath="$PROJECT_DIR$/src/XPDF/XPDFServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/XPDF/Tests/PdfToTextTest.php" afterPath="$PROJECT_DIR$/tests/XPDF/Tests/PdfToTextTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/XPDF/Tests/XPDFServiceProviderTest.php" afterPath="$PROJECT_DIR$/tests/XPDF/Tests/XPDFServiceProviderTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +17,8 @@
       <file leaf-file-name="PdfInfo.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/XPDF/PdfInfo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="114" column="49" lean-forward="true" selection-start-line="114" selection-start-column="49" selection-end-line="114" selection-end-column="49" />
+            <state relative-caret-position="453">
+              <caret line="125" column="52" lean-forward="true" selection-start-line="125" selection-start-column="52" selection-end-line="125" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -139,12 +134,12 @@
       <option name="presentableId" value="Default" />
       <updated>1524036383095</updated>
       <workItem from="1524036384376" duration="79000" />
-      <workItem from="1527001494257" duration="57000" />
+      <workItem from="1527001494257" duration="1582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136000" />
+    <option name="totallyTimeSpent" value="1661000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
@@ -182,8 +177,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/XPDF/PdfInfo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="114" column="49" lean-forward="true" selection-start-line="114" selection-start-column="49" selection-end-line="114" selection-end-column="49" />
+        <state relative-caret-position="453">
+          <caret line="125" column="52" lean-forward="true" selection-start-line="125" selection-start-column="52" selection-end-line="125" selection-end-column="52" />
           <folding />
         </state>
       </provider>
