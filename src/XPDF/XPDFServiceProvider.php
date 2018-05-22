@@ -2,13 +2,15 @@
 
 namespace XPDF;
 
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Silex\Application;
-use Silex\ServiceProviderInterface;
+
 
 class XPDFServiceProvider implements ServiceProviderInterface
 {
 
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $app['xpdf.configuration'] = array();
         $app['xpdf.default.configuration'] = array(
@@ -17,11 +19,11 @@ class XPDFServiceProvider implements ServiceProviderInterface
         );
         $app['xpdf.logger'] = null;
 
-        $app['xpdf.configuration.build'] = $app->share(function (Application $app) {
+        $app['xpdf.configuration.build'] = function (Application $app) {
             return array_replace($app['xpdf.default.configuration'], $app['xpdf.configuration']);
-        });
+        };
 
-        $app['xpdf.pdftotext'] = $app->share(function(Application $app) {
+        $app['xpdf.pdftotext'] = function(Application $app) {
             $configuration = $app['xpdf.configuration.build'];
 
             if (isset($configuration['pdftotext.timeout'])) {
@@ -29,10 +31,6 @@ class XPDFServiceProvider implements ServiceProviderInterface
             }
 
             return PdfToText::create($configuration, $app['xpdf.logger']);
-        });
-    }
-
-    public function boot(Application $app)
-    {
+        };
     }
 }
