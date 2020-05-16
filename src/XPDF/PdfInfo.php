@@ -112,7 +112,7 @@ class PdfInfo extends AbstractBinary
      *
      * @return array
      */
-    private function parseOutputIntoData($output)
+    private function _parseOutputIntoData($output)
     {
         $data = array();
         $exploded = preg_split("/\\r\\n|\\r|\\n/", $output, -1, PREG_SPLIT_NO_EMPTY);
